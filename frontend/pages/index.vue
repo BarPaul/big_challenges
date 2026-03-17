@@ -2,7 +2,6 @@
   <div class="min-h-screen">
     <AppHeader />
     
-    <!-- Hero -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0 bg-gradient-main opacity-30 animate-pulse"></div>
       <div class="z-10 text-center">
@@ -13,13 +12,13 @@
       </div>
     </section>
 
-    <!-- О проекте -->
     <section class="py-20 bg-secondary relative">
       <div class="absolute inset-0 opacity-10" style="background-image: url('~/assets/media/logo.svg'); background-size: 100px; transform: rotate(45deg);"></div>
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
         <div class="carousel">
-          <!-- Заглушка карусели -->
           <div class="bg-gray-800 h-64 rounded-lg flex items-center justify-center">Фото 1</div>
+          <div class="bg-gray-800 h-64 rounded-lg flex items-center justify-center">Фото 2</div>
+          <div class="bg-gray-800 h-64 rounded-lg flex items-center justify-center">Фото 3</div>
         </div>
         <div>
           <h2 class="text-4xl mb-4">О проекте</h2>
@@ -30,7 +29,6 @@
       </div>
     </section>
 
-    <!-- Партнеры -->
     <section class="py-20 bg-primary relative">
       <div class="absolute inset-0 opacity-10" style="background-image: url('~/assets/media/logo.svg'); background-size: 100px; transform: rotate(45deg);"></div>
       <div class="container mx-auto relative z-10">
@@ -41,7 +39,6 @@
       </div>
     </section>
 
-    <!-- ЧаВО -->
     <section class="py-20 bg-gradient-main">
       <div class="container mx-auto">
         <h2 class="text-4xl mb-10 text-center">Часто задаваемые вопросы</h2>

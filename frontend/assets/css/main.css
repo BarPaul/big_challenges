@@ -18,13 +18,14 @@
   --color-primary: #492e92;
   --color-secondary: #02ab9c;
   --color-dark: #000000;
+  --color-white: #f0f0f0;
   
   --font-sans: 'Gilroy', sans-serif;
   --font-heading: 'Halvar Breit', sans-serif;
 }
 
 body {
-    background-color: black;
+    background-color: var(--color-dark);
 }
 
 h1, h2, h3, h4, h5, h6, a {

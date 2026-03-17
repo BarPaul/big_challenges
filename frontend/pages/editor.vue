@@ -4,7 +4,6 @@
     
     <section class="flex-1 bg-gradient-main p-10">
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-        <!-- Форма -->
         <div>
           <h2 class="text-4xl mb-6">Симулировать молекулу</h2>
           <textarea 
@@ -21,7 +20,6 @@
           </button>
         </div>
 
-        <!-- 2D Редактор (Самописный скелет) -->
         <div class="bg-black bg-opacity-50 rounded p-4 relative">
           <h3 class="mb-4">2D Структура</h3>
           <canvas ref="canvas" class="w-full h-64 border border-gray-600"></canvas>
