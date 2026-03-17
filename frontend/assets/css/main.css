@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('~/assets/fonts/Gilroy-Regular.woff2') format('woff2');
+  /* Требуется наличие файла шрифта */
+}
+
+@font-face {
+  font-family: 'Halvar Breit';
+  src: url('~/assets/fonts/HalvarBreit-Medium.woff2') format('woff2');
+  /* Требуется наличие файла шрифта */
+}
+
+@theme {
+  --color-primary: #492e92;
+  --color-secondary: #02ab9c;
+  --color-dark: #000000;
+  
+  --font-sans: 'Gilroy', sans-serif;
+  --font-heading: 'Halvar Breit', sans-serif;
+}
+
+body {
+    background-color: black;
+}
+
+h1, h2, h3, h4, h5, h6, a {
+    color: white;
+    text-decoration: none;
+}

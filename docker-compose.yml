@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NUXT_PUBLIC_API_BASE=http://backend:8000
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - AI_SERVICE_URL=http://ai:8001
+    depends_on:
+      - ai
+    networks:
+      - app-network
+
+  ai:
+    build: ./ai
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./ai/weights:/app/weights
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
