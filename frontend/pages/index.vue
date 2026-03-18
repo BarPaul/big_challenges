@@ -3,9 +3,16 @@
     <AppHeader />
     
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-main opacity-30 animate-pulse"></div>
+      <div class="absolute z-1  inset-[50px] size-[500px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-20"></div>
+      <div class="absolute inset-[550px] to blur-[100px] size-[800px] rounded-full
+      bg-radial from-primary from-20% to-secondary opacity-100 animate-pulse"></div>
+      <div class="absolute z-1 inset-[50px] size-[500px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-20"></div>
+      <div class="absolute inset-[125px] blur-[10px] left-[1700px] size-[500px] rounded-full
+      bg-radial from-primary from-10% to-secondary opacity-60"></div>
       <div class="z-10 text-center">
-        <h1 class="text-5xl md:text-7xl mb-8">In silico симулятор взаимодействия молекул</h1>
+        <h1 class="text-6xl font-bold font-heading text-white">In silico симулятор взаимодействия молекул</h1>
         <NuxtLink to="/editor" class="bg-primary px-8 py-4 rounded-full text-xl font-bold hover:opacity-90 transition">
           Начать
         </NuxtLink>

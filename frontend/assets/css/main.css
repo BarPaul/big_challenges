@@ -2,33 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Gilroy';
-  src: url('~/assets/fonts/Gilroy-Regular.woff2') format('woff2');
-  /* Требуется наличие файла шрифта */
-}
-
-@font-face {
-  font-family: 'Halvar Breit';
-  src: url('~/assets/fonts/HalvarBreit-Medium.woff2') format('woff2');
-  /* Требуется наличие файла шрифта */
-}
-
 @theme {
-  --color-primary: #492e92;
-  --color-secondary: #02ab9c;
-  --color-dark: #000000;
-  --color-white: #f0f0f0;
-  
-  --font-sans: 'Gilroy', sans-serif;
-  --font-heading: 'Halvar Breit', sans-serif;
+    --color-primary: #492e92;
+    --color-secondary: #02ab9c;
+    --color-dark: #060606;
+    --color-white: #f0f0f0;
+
+    --font-heading: "Halvar Breit", sans-serif;
+    --font-sans: "Gilroy", sans-serif;
+
+    --text-base: 16px;
+    --text-md: 20px;
+    --text-xl: 30px;
+    --text-2xl: 40px;
+    --text-3xl: 50px;
+    --text-4xl: 60px;
+    --text-5xl: 70px;
+    --text-6xl: 80px;
+
+    --animate-pulse: pulse 1s easy-in-out infinite;
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 100%;
+        }
+        50% {
+            opacity: 0%;
+        }
+    }
 }
 
 body {
     background-color: var(--color-dark);
 }
 
-h1, h2, h3, h4, h5, h6, a {
-    color: white;
+a {
     text-decoration: none;
 }
