@@ -1,66 +1,74 @@
 <template>
-  <div class="min-h-screen">
+  <div class="flex flex-col items-center justify-center min-h-screen">
     <AppHeader />
     
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-      <div class="absolute z-1  inset-[50px] size-[500px] rounded-full
+    <section class="relative w-full h-screen flex items-center justify-center overflow-hidden z-[5]">
+      <div class="absolute inset-[-50px] size-[500px] blur-[10px] rounded-full
       bg-radial from-secondary from-10% to-primary opacity-20"></div>
       <div class="absolute inset-[550px] to blur-[100px] size-[800px] rounded-full
       bg-radial from-primary from-20% to-secondary opacity-100 animate-pulse"></div>
-      <div class="absolute z-1 inset-[50px] size-[500px] rounded-full
+      <div class="absolute inset-[25px] size-[500px] blur-[50px] rounded-full
       bg-radial from-secondary from-10% to-primary opacity-20"></div>
-      <div class="absolute inset-[125px] blur-[10px] left-[1700px] size-[500px] rounded-full
-      bg-radial from-primary from-10% to-secondary opacity-60"></div>
+      <div class="absolute inset-[175px] blur-[25px] left-[1300px] size-[350px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-60"></div>
       <div class="z-10 text-center">
-        <h1 class="text-6xl font-bold font-heading text-white">In silico симулятор взаимодействия молекул</h1>
-        <NuxtLink to="/editor" class="bg-primary px-8 py-4 rounded-full text-xl font-bold hover:opacity-90 transition">
+        <h1 class="text-6xl md:text-7xl font-bold">In silico симулятор <br> взаимодействия молекул</h1>
+        <NuxtLink to="/editor" class="bg-primary text-white px-[10px] py-[5px] rounded-[20px] text-xl hover:opacity-90 transition">
           Начать
         </NuxtLink>
       </div>
     </section>
 
-    <section class="py-20 bg-secondary relative">
-      <div class="absolute inset-0 opacity-10" style="background-image: url('~/assets/media/logo.svg'); background-size: 100px; transform: rotate(45deg);"></div>
+    <section class="w-full h-screen bg-secondary relative text-center" id="about">
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
-        <div class="carousel">
-          <div class="bg-gray-800 h-64 rounded-lg flex items-center justify-center">Фото 1</div>
-          <div class="bg-gray-800 h-64 rounded-lg flex items-center justify-center">Фото 2</div>
-          <div class="bg-gray-800 h-64 rounded-lg flex items-center justify-center">Фото 3</div>
-        </div>
         <div>
-          <h2 class="text-4xl mb-4">О проекте</h2>
-          <p class="text-lg">
-            Разработка веб-платформы для визуализации уровня безопасности взаимодействия соединений лекарственных препаратов и биологических мишеней.
+          <h2 class="text-4xl mb-[75px] font-heading">О проекте</h2>
+          <p class="text-xl font-sans mb-[65px]">
+            Наш проект направлен на использование технологий machine learning и deep learning для предсказания in silico вероятности активности ряда биомишеней, отвечающих за наличие у соединения болеутоляющих и противовоспалительных свойств, в целях оптимизации in vivo доклинических испытаний и уменьшения числа экспериментов на животных путём проверки только тех соединений, которые с наибольшей вероятностью обладают полезными фармакологическими свойствами. Методы машинного обучения при корректной постановке задачи и валидации демонстрируют высокую предиктивную способность и не требуют значительных вычислительных ресурсов для получения предсказания после этапа обучения, благодаря чему такая модель может при минимальных затратах существенно сократить число испытаний, отсеивая неэффективные соединения.
+          </p>
+
+          <p class="text-xl font-sans">
+            Основная <span class="font-bold">цель</span> проекта — создание эффективного инструмента для биологов и специалистов по разработке лекарственных средств, позволяющего повысить эффективность разработки за счёт сокращения числа необходимых экспериментальных испытаний. Перспективы развития включают обучение более мощных моделей, расширение набора данных и дообучение модели на результатах испытаний новых химических соединений
           </p>
         </div>
       </div>
     </section>
 
-    <section class="py-20 bg-primary relative">
-      <div class="absolute inset-0 opacity-10" style="background-image: url('~/assets/media/logo.svg'); background-size: 100px; transform: rotate(45deg);"></div>
-      <div class="container mx-auto relative z-10">
-        <h2 class="text-4xl mb-10 text-center">Партнеры</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div v-for="i in 4" :key="i" class="bg-black h-32 rounded flex items-center justify-center">Партнер {{ i }}</div>
+    <section class="w-full h-screen bg-primary relative" id="partners">
+      <div class="container mx-auto relative z-10 text-center">
+        <h2 class="text-4xl mb-10 text-center">Наши партнеры</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-y-[300px]">
+          <p class="text-xl">ЛГМУ им. Святителя Луки</p>
+          <p class="text-xl">Городская больница № 7</p>
+          <p class="text-xl">МинЗдрав ЛНР</p>
+          <p class="text-xl">МинОбрНауки ЛНР</p>
         </div>
       </div>
     </section>
 
-    <section class="py-20 bg-gradient-main">
-      <div class="container mx-auto">
-        <h2 class="text-4xl mb-10 text-center">Часто задаваемые вопросы</h2>
-        <div class="max-w-2xl mx-auto space-y-4">
-          <details class="bg-primary p-4 rounded cursor-pointer">
-            <summary class="font-bold">Как работает модель?</summary>
-            <p class="mt-2">Используются методы MLP, ChemBERTa и Morgan fingerprint.</p>
+    <section class="w-full h-screen relative overflow-hidden" id="faq">
+      <div class="absolute -z-10 inset-[-50px] size-[500px] blur-[10px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-20"></div>
+      <div class="absolute -z-10 inset-[550px] to blur-[100px] size-[800px] rounded-full
+      bg-radial from-primary from-20% to-secondary opacity-100 animate-pulse"></div>
+      <div class="absolute -z-10 inset-[25px] size-[500px] blur-[50px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-20"></div>
+      <div class="absolute -z-10 inset-[175px] blur-[25px] left-[1300px] size-[350px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-60"></div>
+      <div class="z-10 mx-auto">
+        <h2 class="text-4xl mb-[125px] text-center">Часто задаваемые вопросы</h2>
+        <div class="max-w-[65%] mx-auto space-y-[10px]">
+          <details class="bg-primary p-[10px] rounded-[10px] cursor-pointer">
+            <summary class="font-bold font-sans text-md">Как работает модель?</summary>
+            <p>Используются методы MLP, ChemBERTa и Morgan fingerprint.</p>
           </details>
-          <details class="bg-primary p-4 rounded cursor-pointer">
-            <summary class="font-bold">Какие данные используются?</summary>
-            <p class="mt-2">База данных ChEMBL.</p>
+          <details class="bg-primary p-[10px] rounded-[10px] cursor-pointer">
+            <summary class="font-bold font-sans text-md">Какие данные используются?</summary>
+            <p>База данных ChEMBL, Uniprot и другие.</p>
           </details>
-          <details class="bg-primary p-4 rounded cursor-pointer">
-            <summary class="font-bold">Можно ли экспортировать результаты?</summary>
-            <p class="mt-2">Да, доступны форматы PDF, Excel, TXT.</p>
+          <details class="bg-primary p-[10px] rounded-[10px] cursor-pointer">
+            <summary class="font-bold font-sans text-md">Можно ли экспортировать результаты?</summary>
+            <p>Да, доступны форматы PDF, Excel, TXT.</p>
           </details>
         </div>
       </div>
