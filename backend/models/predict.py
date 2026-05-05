@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Literal
 
 
 class PredictionRequest(BaseModel):
@@ -7,13 +7,17 @@ class PredictionRequest(BaseModel):
 
 
 class TargetResult(BaseModel):
-    target: str
-    common_name: str
+    chembl_id: str
     uniprot_id: str
-    chEMBL_id: str
-    probability: float
-    target_class: str
+    target_name: str
+    chance: float
 
 
 class PredictionResponse(BaseModel):
-    table: List[TargetResult]
+    id: str
+    table: List[TargetResult] = []
+
+
+class ReportRequest(BaseModel):
+    id: str
+    extension: Literal['txt', 'pdf', 'csv']
