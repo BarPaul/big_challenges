@@ -6,7 +6,9 @@
     --color-primary: #492e92;
     --color-secondary: #02ab9c;
     --color-dark: #060606;
+    --color-red: #b90c0c;
     --color-gray: #101010;
+    --color-gray-300: #6c6c6c;
     --color-lightgray: #bbbbbb;
     --color-white: #f0f0f0;
 
@@ -16,7 +18,9 @@
     --spacing-md: 50px;
 
     --text-base: 16px;
+    --text-sa: 18px;
     --text-md: 20px;
+    --text-lg: 22px;
     --text-xl: 30px;
     --text-2xl: 40px;
     --text-3xl: 50px;
