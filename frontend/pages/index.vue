@@ -13,7 +13,7 @@
       bg-radial from-secondary from-10% to-primary opacity-60"></div>
       <div class="z-10 text-center">
         <h1 class="text-6xl md:text-7xl font-bold">In silico симулятор <br> взаимодействия молекул</h1>
-        <NuxtLink to="/editor" class="bg-primary text-white px-[10px] py-[5px] rounded-[20px] text-xl hover:opacity-90 transition">
+        <NuxtLink to="/editor" class="bg-primary text-white px-[50px] py-[5px] rounded-[25px] text-xl hover:opacity-90 transition">
           Начать
         </NuxtLink>
       </div>

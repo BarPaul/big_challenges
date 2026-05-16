@@ -99,7 +99,7 @@ def load_resources():
     print("🔄 Загрузка имён мишеней...")
     dataset = pd.read_csv("drug_target_dataset.csv")
     target_cols = [col for col in dataset.columns if col not in ["compound_chembl_id", "smiles"]]
-    print(f"✅ Найдено {len(target_cols)} мишеней")
+    print(f"✅ Мишени найдены!")
 
 
     print("✅ Информация о мишениях будет загружаться по требованию (on-demand).")
@@ -188,16 +188,17 @@ async def predict(request: SmilesRequest):
     for i, chembl_id in enumerate(target_cols):
         if i >= len(pred_probs):
             break
-        chance = float(pred_probs[i])
+        chance = round(float(pred_probs[i]), 4)
+        if chance == 0:
+            continue
         info = get_uniprot_from_chembl(chembl_id)
         results.append({
             "chembl_id": chembl_id,
             "uniprot_id": info["uniprot_id"],
             "target_name": info["target_name"],
-            "chance": round(chance, 4)
+            "chance": chance
         })
     results.sort(key=lambda x: x["chance"], reverse=True)
-    results = results[:10]
 
     return {"table": results}
 

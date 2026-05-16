@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @theme {
     --color-primary: #492e92;
     --color-secondary: #02ab9c;
     --color-dark: #060606;
     --color-red: #b90c0c;
     --color-gray: #101010;
+    --color-green: #0c780c;
+    --color-yellow: #78680c;
     --color-gray-300: #6c6c6c;
     --color-lightgray: #bbbbbb;
     --color-white: #f0f0f0;

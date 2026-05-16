@@ -22,7 +22,16 @@ export default defineNuxtConfig({
         '@vue/devtools-core',
         '@vue/devtools-kit',
         'openchemlib',
-      ]
+      ],
+    },
+    server: {
+      proxy: {
+        '/api': {
+          target: "http://localhost:8000",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(`/api`, ``)
+        }
+      }
     }
   }
 })

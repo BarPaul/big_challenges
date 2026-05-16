@@ -2,7 +2,15 @@
   <div class="min-h-screen flex flex-col items-center">
     <AppHeader />
 
+    <div class="max-w-full overflow-hidden">
+      <div class="absolute inset-[-150px] size-[500px] blur-[10px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-60 z-[-1] "></div>
+      <div class="absolute inset-[450px] left-[800px] size-[700px] blur-[15px] rounded-full
+      bg-radial from-secondary from-10% to-primary opacity-40 z-[-1]"></div>
+    </div>
+
     <section class="flex-1 bg-gradient-main p-4 sm:p-6 mt-[20px]">
+      
       <div class="container mx-auto max-w-5xl">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
@@ -12,7 +20,7 @@
             <div class="flex flex-wrap gap-2 mb-3">
               <button v-for="atom in atomList" :key="atom"
                 @click="selectedAtom = atom"
-                :class="['min-h-[40px] px-2.5 py-1.5 rounded text-xs sm:text-sm font-bold border transition  rounded-[20px] ml-[10px] text-base font-sans', 
+                :class="['min-h-[40px] px-2.5 py-1.5 rounded text-xs sm:text-sm font-bold border transition rounded-[20px] ml-[10px] text-base font-sans', 
                          selectedAtom === atom ? 'bg-primary border-primary text-white' : 'bg-gray-800 border-gray-600 hover:bg-gray-700']">
                 {{ atom }}
               </button>
@@ -33,7 +41,7 @@
             </div>
             
             <div ref="canvasRef"
-              class="w-full h-64 sm:h-80 md:h-96 lg:h-[420px] bg-black/50 rounded-[50px] border border-gray-700 relative select-none touch-none overflow-hidden"
+              class="w-full h-64 sm:h-80 md:h-96 lg:h-[420px] bg-white/10 rounded-[50px] border border-gray-700 relative select-none touch-none overflow-hidden"
               @mousedown.prevent="handleStart"
               @mousemove="handleMove"
               @mouseup="handleEnd"
@@ -42,7 +50,7 @@
               @touchmove.prevent="handleMove"
               @touchend.prevent="handleEnd">
               
-              <svg class="w-full h-ful" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+              <svg class="w-full h-full" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
                 <rect v-if="isSelecting && selectRect"
                   :x="selectRect.x" :y="selectRect.y" :width="selectRect.w" :height="selectRect.h"
                   fill="rgba(59, 130, 246, 0.15)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4,3" />
@@ -59,7 +67,7 @@
                     :fill="atomColors[atom.symbol]?.bg || '#475569'"
                     :stroke="selectedAtomIds.includes(atom.id) ? '#f59e0b' : '#64748b'"
                     :stroke-width="selectedAtomIds.includes(atom.id) ? 3 : 2.5" />
-                  <text :x="atom.x" :y="atom.y + 5" text-anchor="middle" class="fill-white font-mono text-sm pointer-events-none select-none">
+                  <text :x="atom.x" :y="atom.y + 5" text-anchor="middle" class="fill-white font-sans text-sm pointer-events-none select-none">
                     {{ atom.symbol }}
                   </text>
                 </g>
@@ -69,7 +77,7 @@
             
             <div class="mt-4">
               <label class="block text-sm text-gray-300 font-sans text-md mt-[5px] mb-[5px]">Smiles:</label>
-              <input v-model="smiles" readonly
+              <input v-model="smiles"
                 class="w-full min-h-[44px] bg-gray-900 border border-gray-700 rounded-[12px] px-3 py-2 text-dark text-base font-sans sm:text-base focus:outline-none focus:ring-2 focus:ring-primary mb-[5px]" />
               
               <div v-if="validationMsg" :class="['mt-2 text-sm flex items-center gap-1 mb-[5px]', validationStatus === 'error' ? 'text-red-400' : 'text-green-400']">
@@ -86,9 +94,12 @@
 
           <div class="space-y-4 order-last lg:order-none">
             <div class="bg-black/50 rounded-xl p-4 sm:p-5">
-              <h3 class="text-lg sm:text-xl font-bold mb-3">Пример</h3>
+              <h3 class="text-lg sm:text-xl font-bold mb-3">Примеры</h3>
               <div class="space-y-2 text-sm mb-[50px]">
-                <button @click="loadExample('ethanol')" class="block w-full text-left px-3 py-2 bg-gray-800 rounded-[25px] hover:bg-gray-700 transition min-h-[40px]">🧪 Этанол: <code class="font-mono bg-gray-900 px-1">CCO</code></button>
+                <button @click="loadExample('ethanol')" class="block w-full text-left px-3 py-2 bg-gray-800 rounded-[25px] hover:bg-gray-700 transition min-h-[40px]">Этанол</button>
+                <button @click="loadExample('aspirin')" class="block w-full text-left px-3 py-2 bg-gray-800 rounded-[25px] hover:bg-gray-700 transition min-h-[40px]">Аспирин</button>
+                <button @click="loadExample('phenobarbital')" class="block w-full text-left px-3 py-2 bg-gray-800 rounded-[25px] hover:bg-gray-700 transition min-h-[40px]">Фенобарбитал</button>
+                <button @click="loadExample('fluoxetine')" class="block w-full text-left px-3 py-2 bg-gray-800 rounded-[25px] hover:bg-gray-700 transition min-h-[40px]">Флуоксетин</button>
               </div>
             </div>
           </div>
@@ -210,7 +221,7 @@ const handleStart = (e: MouseEvent | TouchEvent) => {
   dragStartPos.value = c
   dragOffsets.value.clear()
 
-    const hitAtom = findAtomNear(c)
+  const hitAtom = findAtomNear(c)
   const hitBond = !hitAtom ? findBondNear(c) : null
 
   if (hitAtom) {
@@ -374,12 +385,87 @@ const status = (t: 'success'|'warning'|'error', m: string) => {
   validationMsg.value = m; validationStatus.value = t
 }
 
+
+
 const updateSmiles = () => {
-  if (atoms.value.length === 0) { smiles.value = ''; status('error', 'Молекула пуста'); return }
-  if (atoms.value.length === 1) { smiles.value = atoms.value[0].symbol; validateMolecule(smiles.value); return }
+  if (atoms.value.length === 0) { 
+    smiles.value = ''; 
+    status('error', 'Молекула пуста'); 
+    return 
+  }
   
-  const chain = atoms.value.map(a => a.symbol).join('')
-  smiles.value = bonds.value.some(b => b.type !== 'single') ? chain.replace(/C([CO])/g, 'C(=$1)') : chain
+  
+  const adj = new Map<number, { neighborId: number, bondType: string, bondId: number }[]>()
+  atoms.value.forEach(a => adj.set(a.id, []))
+  bonds.value.forEach(b => {
+    adj.get(b.from)?.push({ neighborId: b.to, bondType: b.type, bondId: b.id })
+    adj.get(b.to)?.push({ neighborId: b.from, bondType: b.type, bondId: b.id })
+  })
+
+  const visitedAtoms = new Set<number>()
+  const visitedBonds = new Set<number>()
+  const ringLabels = new Map<number, number>() 
+  let currentLabel = 0
+  
+  
+  const dfs = (atomId: number, parentAtomId: number | null): string => {
+    visitedAtoms.add(atomId)
+    const atom = atoms.value.find(a => a.id === atomId)
+    let res = atom?.symbol || '?'
+    
+    const neighbors = adj.get(atomId) || []
+    
+    const branches: string[] = []
+    
+    for (const edge of neighbors) {
+      if (visitedBonds.has(edge.bondId)) continue
+      
+      visitedBonds.add(edge.bondId)
+      
+      
+      if (!visitedAtoms.has(edge.neighborId)) {
+        let bondPrefix = ''
+        if (edge.bondType === 'double') bondPrefix = '='
+        if (edge.bondType === 'triple') bondPrefix = '#'
+        
+        const subStructure = dfs(edge.neighborId, atomId)
+        branches.push(bondPrefix + subStructure)
+      } 
+      
+      else {
+        
+        if (!ringLabels.has(edge.neighborId)) {
+          currentLabel++
+          ringLabels.set(edge.neighborId, currentLabel)
+        }
+        const label = ringLabels.get(edge.neighborId)!
+        const labelStr = label > 9 ? `%${label}` : `${label}`
+        
+        let bondPrefix = ''
+        if (edge.bondType === 'double') bondPrefix = '='
+        if (edge.bondType === 'triple') bondPrefix = '#'
+        
+        
+        res += bondPrefix + labelStr
+      }
+    }
+    
+    
+    if (ringLabels.has(atomId)) {
+      const label = ringLabels.get(atomId)!
+      const labelStr = label > 9 ? `%${label}` : `${label}`
+      res += labelStr
+    }
+
+    
+    res += branches.join('')
+    
+    return res
+  }
+  
+  
+  smiles.value = dfs(atoms.value[0].id, null)
+  
   validateMolecule(smiles.value)
 }
 
@@ -408,23 +494,246 @@ const loadExample = (name: string) => {
   type ExAtom = {x:number; y:number; s:string}
   type ExBond = {f:number; t:number; type:'single'|'double'|'triple'}
   
+  
   const examples: Record<string, {atoms: ExAtom[]; bonds: ExBond[]}> = {
     ethanol: {
-      atoms: [{x:200,y:200,s:'C'}, {x:350,y:200,s:'C'}, {x:500,y:200,s:'O'}],
+      atoms: [{x:200,y:200,s:'C'}, {x:300,y:200,s:'C'}, {x:400,y:200,s:'O'}],
       bonds: [{f:0,t:1,type:'single'}, {f:1,t:2,type:'single'}]
     },
-    benzene: {
+    aspirin: {
+      
       atoms: [
-        {x:400,y:120,s:'c'}, {x:490,y:180,s:'c'}, {x:490,y:260,s:'c'},
-        {x:400,y:300,s:'c'}, {x:310,y:260,s:'c'}, {x:310,y:180,s:'c'}
+        {x:150,y:200,s:'C'}, 
+        {x:210,y:200,s:'C'}, 
+        {x:210,y:140,s:'O'}, 
+        {x:270,y:200,s:'O'}, 
+        {x:330,y:200,s:'c'}, 
+        {x:390,y:170,s:'c'}, 
+        {x:450,y:200,s:'c'}, 
+        {x:450,y:260,s:'c'}, 
+        {x:390,y:290,s:'c'}, 
+        {x:330,y:260,s:'c'}, 
+        {x:510,y:200,s:'C'}, 
+        {x:510,y:140,s:'O'}, 
+        {x:570,y:200,s:'O'}  
       ],
       bonds: [
-        {f:0,t:1,type:'double'}, {f:1,t:2,type:'single'}, {f:2,t:3,type:'double'},
-        {f:3,t:4,type:'single'}, {f:4,t:5,type:'double'}, {f:5,t:0,type:'single'}
+        {f:0,t:1,type:'single'}, 
+        {f:1,t:2,type:'double'}, 
+        {f:1,t:3,type:'single'}, 
+        {f:3,t:4,type:'single'}, 
+        {f:4,t:5,type:'double'}, 
+        {f:5,t:6,type:'single'},
+        {f:6,t:7,type:'double'},
+        {f:7,t:8,type:'single'},
+        {f:8,t:9,type:'double'},
+        {f:9,t:4,type:'single'}, 
+        {f:6,t:10,type:'single'}, 
+        {f:10,t:11,type:'double'}, 
+        {f:10,t:12,type:'single'}  
+      ]
+    },
+    phenobarbital: {
+      
+      atoms: [
+        {x:100,y:200,s:'C'}, 
+        {x:160,y:200,s:'C'}, 
+        {x:220,y:200,s:'C'}, 
+        
+        
+        {x:220,y:260,s:'C'}, 
+        {x:280,y:290,s:'N'}, 
+        {x:340,y:260,s:'C'}, 
+        {x:340,y:200,s:'N'}, 
+        {x:280,y:170,s:'C'}, 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {x:220,y:200,s:'C'}, 
+        {x:280,y:170,s:'C'}, 
+        {x:340,y:200,s:'N'}, 
+        {x:340,y:260,s:'C'}, 
+        {x:280,y:290,s:'N'}, 
+        {x:220,y:260,s:'C'}, 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {x:100,y:200,s:'C'}, 
+        {x:150,y:200,s:'C'}, 
+        {x:200,y:200,s:'C'}, 
+        
+        {x:200,y:260,s:'C'}, 
+        {x:250,y:290,s:'N'}, 
+        {x:310,y:260,s:'C'}, 
+        {x:310,y:200,s:'N'}, 
+        {x:250,y:170,s:'C'}, 
+        
+        
+        
+        
+        {x:200,y:260,s:'C'}, 
+        {x:250,y:290,s:'N'}, 
+        {x:310,y:260,s:'C'}, 
+        {x:310,y:200,s:'N'}, 
+        {x:250,y:170,s:'C'}, 
+        
+        
+        {x:200,y:140,s:'c'}, 
+        {x:250,y:110,s:'c'}, 
+        {x:310,y:140,s:'c'}, 
+        {x:310,y:200,s:'c'}, 
+        {x:250,y:170,s:'c'}, 
+        {x:190,y:170,s:'c'}  
+      ],
+      bonds: [
+        {f:0,t:1,type:'single'},
+        {f:1,t:2,type:'single'},
+        
+        
+        {f:2,t:3,type:'single'},
+        {f:3,t:4,type:'single'},
+        {f:4,t:5,type:'single'},
+        {f:5,t:6,type:'single'},
+        {f:6,t:7,type:'single'},
+        {f:7,t:2,type:'single'},
+        
+        
+        {f:3,t:14,type:'double'}, 
+        
+      ]
+      
+      
+    },
+    fluoxetine: {
+      
+      atoms: [
+        {x:100,y:200,s:'C'}, 
+        {x:150,y:200,s:'N'}, 
+        {x:200,y:200,s:'C'}, 
+        {x:250,y:200,s:'C'}, 
+        {x:300,y:200,s:'C'}, 
+        
+        
+        {x:300,y:140,s:'c'}, 
+        {x:350,y:110,s:'c'}, 
+        {x:400,y:140,s:'c'}, 
+        {x:400,y:200,s:'c'}, 
+        {x:350,y:230,s:'c'}, 
+        {x:300,y:200,s:'c'}, 
+        
+        
+        {x:300,y:140,s:'c'}, 
+        {x:350,y:110,s:'c'}, 
+        {x:400,y:140,s:'c'}, 
+        {x:400,y:200,s:'c'}, 
+        {x:350,y:230,s:'c'}, 
+        {x:300,y:200,s:'c'}, 
+        
+        
+        {x:350,y:260,s:'O'}, 
+        
+        
+        
+        
+        {x:400,y:260,s:'c'}, 
+        {x:450,y:230,s:'c'}, 
+        {x:500,y:260,s:'c'}, 
+        {x:500,y:320,s:'c'}, 
+        {x:450,y:350,s:'c'}, 
+        {x:400,y:320,s:'c'}, 
+        
+        
+        {x:550,y:260,s:'C'}, 
+        {x:550,y:200,s:'F'}, 
+        {x:600,y:260,s:'F'}, 
+        {x:550,y:320,s:'F'}  
+      ],
+      bonds: [
+        {f:0,t:1,type:'single'},
+        {f:1,t:2,type:'single'},
+        {f:2,t:3,type:'single'},
+        {f:3,t:4,type:'single'},
+        
+        
+        {f:4,t:5,type:'single'},
+        {f:5,t:6,type:'double'},
+        {f:6,t:7,type:'single'},
+        {f:7,t:8,type:'double'},
+        {f:8,t:9,type:'single'},
+        {f:9,t:10,type:'double'},
+        {f:10,t:5,type:'single'}, 
+        
+        
+        
+        {f:10,t:5,type:'single'}, 
+
+        
+        {f:4,t:11,type:'single'},
+        {f:11,t:12,type:'single'},
+        
+        
+        {f:12,t:13,type:'double'},
+        {f:13,t:14,type:'single'},
+        {f:14,t:15,type:'double'},
+        {f:15,t:16,type:'single'},
+        {f:16,t:17,type:'double'},
+        {f:17,t:12,type:'single'},
+        
+        
+        {f:14,t:18,type:'single'},
+        {f:18,t:19,type:'single'},
+        {f:18,t:20,type:'single'},
+        {f:18,t:21,type:'single'}
       ]
     }
   }
   
+  
+  
+  if (name === 'phenobarbital') {
+     
+     
+     
+     examples.phenobarbital = {
+       atoms: [
+         {x:100,y:200,s:'C'}, {x:150,y:200,s:'C'}, {x:200,y:200,s:'C'}, 
+         {x:200,y:260,s:'C'}, {x:250,y:290,s:'N'}, {x:310,y:260,s:'C'}, {x:310,y:200,s:'N'}, {x:250,y:170,s:'C'}, 
+         {x:200,y:320,s:'O'}, {x:310,y:320,s:'O'}, {x:250,y:110,s:'O'}, 
+         {x:200,y:140,s:'c'}, {x:250,y:110,s:'c'}, {x:310,y:140,s:'c'}, {x:310,y:200,s:'c'}, {x:250,y:230,s:'c'}, {x:190,y:200,s:'c'} 
+       ],
+       bonds: [
+         {f:0,t:1,type:'single'}, {f:1,t:2,type:'single'},
+         {f:2,t:3,type:'single'}, {f:3,t:4,type:'single'}, {f:4,t:5,type:'single'},
+         {f:5,t:6,type:'single'}, {f:6,t:7,type:'single'}, {f:7,t:2,type:'single'},
+         {f:3,t:8,type:'double'}, {f:5,t:9,type:'double'}, {f:7,t:10,type:'double'},
+         {f:2,t:11,type:'single'}, {f:11,t:12,type:'double'}, {f:12,t:13,type:'single'},
+         {f:13,t:14,type:'double'}, {f:14,t:15,type:'single'}, {f:15,t:16,type:'double'},
+         {f:16,t:11,type:'single'}
+       ]
+     }
+  }
+
   const ex = examples[name]
   if (!ex) return
   
@@ -443,8 +752,7 @@ const loadExample = (name: string) => {
     }
   })
   
-  smiles.value = name === 'ethanol' ? 'CCO' : 'c1ccccc1'
-  validateMolecule(smiles.value)
+  updateSmiles()
 }
 
 const handleKeyDown = (e: KeyboardEvent) => {
@@ -458,12 +766,12 @@ const handleKeyDown = (e: KeyboardEvent) => {
   }
 }
 
-
 const simulate = async () => {
   if (validationStatus.value !== 'success') return
   loading.value = true
   try {
     const res = await $fetch('/api/predict/biotargets', { method: 'POST', body: { smiles: smiles.value } })
+    localStorage.setItem('lastSmiles', smiles.value) 
     localStorage.setItem('lastPrediction', JSON.stringify(res))
     router.push('/result')
   } catch (e: any) {
